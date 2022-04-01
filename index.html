@@ -44,8 +44,85 @@
 
     On a la possibilité de supprimer des fichiers se trouvant dans le repository.
 
-    git rm : 
- -->
+    git rm <files> : va permettre de supprimer un fichier du repository (et dans le projet).
+
+    /!\ Si le fichier est modifié et non commit, une erreur sera retournée.
+
+    git rm supprime instantanément le fichier du dossier de projet mais il faudra effectuer un commit pour valider la suppression du repository.
+
+    git rm --cached <files> : permet de supprimer le fichier du repository sans le supprimer du projet. Il faudra faire un commit pour valider
+
+    git mv <nom du fichier> <nouveau nom du fichier> : le fichier sera renommé. Pour valider il faut faire un commit.
+    
+    git mv <nom du fichier> assets/<nom du fichier> : le fichier est déplacé dans le dossier "assets".
+
+    /!\ On peut renommer, supprimer, ajouter, modifier les fichiers à la main, git le detectera. La seule différence avec les commandes de git, c'est l'interprétation de l'action.
+
+    Revenir en arrière avec GIT
+
+    git log : permet de voir l'historique des commits.
+
+    git log comprend beaucoup d'options permettant d'affiner l'historique.
+        --author
+        --since
+        --pretty
+
+    git checkout ; permet deux choses :
+        - changer de branche
+        - restaurer un fichier, un commit...
+
+    /!\ git checkout a été remplacé (restore, reset, revert) (switch).
+
+    On va diviser la fonction restore et les fonctions revert, reset.
+
+    git restore permet de restaurer un fichier tant que sa suppression n'a pas été commit.
+    Si la suppresion a été commit, il faudra impérativement revenir au commit précédent donc avec une autre commande (reset, revert).
+
+    git restore va permettre de restaurer les fichiers initials du commit actuel. Si vous utilisez git restore sur le fichier, ils se réinitialisera dans sa version de base (lié au commit actuel).
+
+    Dans le cas d'un fichier supprimé (git rm) : 
+        - git restore --stage ‹files>.
+
+    Dans le cas ou on veut revenir au point de départ du commit ou si on veut restaurer un fichier totalement supprimé de l'espace de travail :
+        - git restore <files>.
+    
+    git reset et git revert vont nous permettre de revenir sur un précédent commit.
+
+    git reset va revenir sur le commit que l'on aura ciblé, en effaçant l'historique des commits qui se trouvent entre le commits qui se trouvent entre le commit actuel et le commit sur lequel revenir.
+
+    git revert va créer un nouveau commit à partir de l'ancien.
+
+    git reset --hard HEAD^ : permet de revenir au commit précédent.
+    /!\ Le commit actuel sera totalement supprimé.
+
+    git reset --hard HEAD~2 : permet de revenir deux commits en arrière.
+
+    avec git reset --soft, vous apportez une sécurité supplémentaire. Il faudra commit à nouveau pour valider le reset.
+
+    Pour utiliser git revert, il va falloir trouver la clé du commit sur lequel vous voulez revenir. Pour ça, vous pouvez utiliser git log.
+
+    Avec la clé : 
+    git revert <clé du commit>
+
+    Git va récupérer l'ancien commit et le commit le plus récent. Il va les comparer et nous laisser le choix sur ce qui doit être modifié ou récupéré.
+
+            - Accept Current Changes
+            - Accept Incoming Changes
+            - Accept Both changes
+            - Compare changes
+
+    Il ne reste plus qu'à ajouter les fichiers grâce à git add et à créer le nouveau commit.
+
+    Les branches permettent de développer des fonctionnalités sans impacter la branche master qui est la branche principale. Généralement tout ce qui arrive dessus est testé et fonctionnel.
+
+    Dans certaines boites, c'est le lead dev qui valide les fusions.
+
+    git branch <nom de la branche> : permet de créer une branche.
+
+    git switch <nom de la branche> : permet de se déplacer sur une autre branche.
+
+    
+-->
 
 <!DOCTYPE html>
 <html lang="en">
